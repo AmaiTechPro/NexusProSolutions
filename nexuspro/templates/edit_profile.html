@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+
+{% load widget_tweaks %}
+
+
+{% load static %}
+
+{% block title %}Edit Profile Details | Nexus Pro Solutions{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h1 class="display-5 fw-bold mb-1">
+                Manage Your Profile
+            </h1>
+            <p class="lead text-warning">Update your personal and professional contact details.</p>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="card p-4 shadow-lg">
+                        <h2 class="fw-bold mb-4 border-bottom pb-2">Update Account Details</h2>
+                        
+                        {% comment %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} text-center">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                        {% endcomment %}
+                        
+                        <form method="POST" enctype="multipart/form-data" action="{% url 'edit_profile' %}">
+                            {% csrf_token %}
+                            
+                            {% if user_form.non_field_errors or profile_form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    {% if user_form.non_field_errors %}{{ user_form.non_field_errors }}{% endif %}
+                                    {% if profile_form.non_field_errors %}{{ profile_form.non_field_errors }}{% endif %}
+                                </div>
+                            {% endif %}
+                            
+                            <h3 class="fs-5 fw-bold text-primary mt-4 mb-3">Login Credentials</h3>
+                            <div class="row g-3">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ user_form.first_name.id_for_label }}" class="form-label">{{ user_form.first_name.label }}</label>
+                                    {{ user_form.first_name|add_class:'form-control' }}
+                                    {% for error in user_form.first_name.errors %}<small class="text-danger d-block">{{ error }}</small>{% endfor %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ user_form.last_name.id_for_label }}" class="form-label">{{ user_form.last_name.label }}</label>
+                                    {{ user_form.last_name|add_class:'form-control' }}
+                                    {% for error in user_form.last_name.errors %}<small class="text-danger d-block">{{ error }}</small>{% endfor %}
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="{{ user_form.email.id_for_label }}" class="form-label">{{ user_form.email.label }}</label>
+                                    {{ user_form.email|add_class:'form-control' }}
+                                    {% for error in user_form.email.errors %}<small class="text-danger d-block">{{ error }}</small>{% endfor %}
+                                </div>
+                            </div>
+                            
+                            <h3 class="fs-5 fw-bold text-primary mt-4 mb-3">Professional & Contact Details</h3>
+                            <div class="row g-3">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ profile_form.phone_number.id_for_label }}" class="form-label">{{ profile_form.phone_number.label }}</label>
+                                    {{ profile_form.phone_number|add_class:'form-control' }}
+                                    {% for error in profile_form.phone_number.errors %}<small class="text-danger d-block">{{ error }}</small>{% endfor %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ profile_form.service_interest.id_for_label }}" class="form-label">{{ profile_form.service_interest.label }}</label>
+                                    {{ profile_form.service_interest|add_class:'form-select' }} 
+                                    {% for error in profile_form.service_interest.errors %}<small class="text-danger d-block">{{ error }}</small>{% endfor %}
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <label for="{{ profile_form.bio.id_for_label }}" class="form-label">{{ profile_form.bio.label }}</label>
+                                    {{ profile_form.bio|add_class:'form-control' }}
+                                    <small class="text-muted d-block">Tell us about your background (e.g., "Seeking CCNP training," "SME owner").</small>
+                                    {% for error in profile_form.bio.errors %}<small class="text-danger d-block">{{ error }}</small>{% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg mt-3">
+                                    <i class="fas fa-save me-2"></i> Save Changes
+                                </button>
+                                <a href="{% url 'profile' %}" class="btn btn-outline-secondary">
+                                    <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <h2 class="mb-3 fw-bold">Need to Change Your Password?</h2>
+            <p class="lead mb-4">You can update your security credentials here at any time.</p>
+            <a href="{% url 'change_password' %}" class="btn btn-warning btn-lg shadow-lg">
+                <i class="fas fa-lock me-2"></i> Change Password
+            </a>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block extra_js %}
+{% load your_custom_tags %} 
+{% endblock %}

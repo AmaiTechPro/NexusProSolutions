@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Custom Web Development, Django & Deployment Services | Nexus Pro Solutions{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 bg-primary text-white bg-gradient">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">
+                Custom Software & Web Development Solutions
+            </h1>
+            <p class="lead mb-4 mx-auto" style="max-width: 800px;">
+                From dynamic web apps to secure booking portals, we build fast, scalable digital platforms using modern frameworks like Django and Python, ensuring seamless hosting and deployment.
+            </p>
+            <a href="{% url 'bookings' %}?service=webdev" class="btn btn-warning btn-lg me-3 shadow-lg">
+                <i class="fas fa-code me-2"></i> Start Your Project Discovery Call
+            </a>
+            <a href="{% url 'portfolio' %}" class="btn btn-outline-light btn-lg">
+                View Our Portfolio
+            </a>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 text-dark">Built on Reliable, Scalable Technology</h2>
+            
+            <div class="row g-4 align-items-center">
+                
+                <div class="col-lg-7">
+                    <h3 class="fs-4 fw-bold mb-3">Powering Projects with Python & Django</h3>
+                    <p class="lead">We specialize in Python's Django framework—the robust, secure, and rapid development tool chosen by tech leaders globally.</p>
+                    <ul class="list-unstyled checklist">
+                        <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Security First: Django’s built-in protections against common web vulnerabilities.</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Scalability:Architected to grow with your business and handle increased user load.</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-primary me-2"></i> Rapid Development:Faster turnaround times due to Django’s comprehensive features.</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-5 text-center">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <h2 class="fw-bold mb-4 border-bottom pb-2">Our Web & Software Capabilities</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="p-4 rounded shadow-sm h-100 border-top border-4 border-primary">
+                        <i class="fas fa-rocket fa-3x text-primary mb-3"></i>
+                        <h3 class="fs-4 fw-bold">Custom Web Applications</h3>
+                        <p class="text-muted">Building bespoke solutions like booking portals, inventory trackers, internal dashboards, and data analysis tools.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="p-4 rounded shadow-sm h-100 border-top border-4 border-primary">
+                        <i class="fas fa-laptop-code fa-3x text-primary mb-3"></i>
+                        <h3 class="fs-4 fw-bold">Professional Business Websites</h3>
+                        <p class="text-muted">High-converting marketing sites, portfolio platforms, and dynamic content management systems (CMS) with Bootstrap 5 design.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="p-4 rounded shadow-sm h-100 border-top border-4 border-primary">
+                        <i class="fas fa-server fa-3x text-primary mb-3"></i>
+                        <h3 class="fs-4 fw-bold">Deployment & Infrastructure</h3>
+                        <p class="text-muted">Seamless deployment to hosting providers (AWS, Digital Ocean, Heroku) with ongoing maintenance and infrastructure support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5">Our Simplified 4-Step Development Process</h2>
+            
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <div class="p-4 border rounded h-100">
+                        <h3 class="display-6 fw-bold text-warning">1. Discover</h3>
+                        <p>Detailed discussion of requirements, user stories, and feature prioritization.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="p-4 border rounded h-100">
+                        <h3 class="display-6 fw-bold text-warning">2. Develop</h3>
+                        <p>Agile development cycle with regular client checkpoints for feedback and iteration.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="p-4 border rounded h-100">
+                        <h3 class="display-6 fw-bold text-warning">3. Deploy</h3>
+                        <p>Secure, tested launch to your live server environment with full configuration management.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="p-4 border rounded h-100">
+                        <h3 class="display-6 fw-bold text-warning">4. Support</h3>
+                        <p>Post-launch monitoring, bug fixes, and continuous minor updates for stability.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-5 bg-primary text-white text-center">
+        <div class="container">
+            <h2 class="mb-3 fw-bold">Ready to Build Something Great?</h2>
+            <p class="lead mb-4">Let's turn your idea into a functional, secure web application.</p>
+            <a href="{% url 'bookings' %}?service=webdev" class="btn btn-warning btn-lg shadow-lg">
+                <i class="fas fa-arrow-right me-2"></i> Get a Project Quote
+            </a>
+        </div>
+    </section>
+
+{% endblock %}

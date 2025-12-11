@@ -1,0 +1,132 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}CV Writing, LinkedIn Optimization & Career Advisory | Nexus Pro Solutions{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 bg-success text-white bg-gradient">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">
+                Unlock Your Next Opportunity: CV, LinkedIn & Career Optimization
+            </h1>
+            <p class="lead mb-4 mx-auto" style="max-width: 800px;">
+                Stop sending resumes into the void. We craft ATS-optimized CVs, compelling cover letters, and professional LinkedIn profiles that get noticed by recruiters and hiring managers.
+            </p>
+            <a href="{% url 'bookings' %}?service=cv" class="btn btn-warning btn-lg me-3 shadow-lg">
+                <i class="fas fa-briefcase me-2"></i> Start Your Career Audit Now
+            </a>
+            <a href="#packages" class="btn btn-outline-light btn-lg">
+                View Packages
+            </a>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 text-dark">Why Your Current CV is Failing the Test</h2>
+            
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6">
+                    <img src="{%static 'img/ats.png' %}" alt="Applicant Tracking System(ATS) Visual"
+                    style="height: 350px; width: 500px;"
+                    
+                    
+                    >
+                   
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="fs-4 fw-bold mb-3">The ATS Filter Challenge</h3>
+                    <p class="lead">Most resumes are never seen by human eyes. They are rejected by Applicant Tracking Systems (ATS) for missing keywords, poor formatting, or improper structure.</p>
+                    <ul class="list-unstyled checklist">
+                        <li class="mb-3"><i class="fas fa-times-circle text-danger me-2"></i> Common Failure: Fancy designs that confuse the software.</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> Our Solution: Structured, keyword-rich content designed to rank highly with all major ATS platforms.</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> Expertise: We know the technical keywords required for IT, Networking, and Tech roles.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <h2 class="fw-bold mb-4 border-bottom pb-2">Our Comprehensive Optimization Services</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="p-4 rounded shadow-sm h-100 border-top border-4 border-success">
+                        <i class="fas fa-file-alt fa-3x text-success mb-3"></i>
+                        <h3 class="fs-4 fw-bold">Professional CV & Resume Writing</h3>
+                        <p class="text-muted">We transform your experience into a compelling narrative, focusing on quantifiable achievements and industry-specific keywords for your target role.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="p-4 rounded shadow-sm h-100 border-top border-4 border-success">
+                        <i class="fab fa-linkedin fa-3x text-primary mb-3"></i>
+                        <h3 class="fs-4 fw-bold">LinkedIn Profile Overhaul</h3>
+                        <p class="text-muted">A LinkedIn profile is your digital CV. We optimize your headline, summary, and experience to attract recruiters and build your professional brand.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="p-4 rounded shadow-sm h-100 border-top border-4 border-success">
+                        <i class="fas fa-envelope-open-text fa-3x text-success mb-3"></i>
+                        <h3 class="fs-4 fw-bold">Targeted Cover & Application Letters</h3>
+                        <p class="text-muted">We craft bespoke cover letters that directly address the job requirements and highlight your fit, increasing your chances of an interview.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="packages" class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <h2 class="fw-bold mb-5">Choose Your Career Acceleration Package</h2>
+            
+            <div class="row justify-content-center g-4">
+                <div class="col-md-4">
+                    <div class="card bg-white text-dark h-100">
+                        <div class="card-header bg-warning text-dark fw-bold">Entry Level</div>
+                        <div class="card-body">
+                            <h4 class="fw-bold">CV Revamp</h4>
+                            <ul class="list-unstyled text-start small mt-3">
+                                <li><i class="fas fa-check text-success me-2"></i> ATS-Compliant CV</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Keyword Optimization</li>
+                                <li><i class="fas fa-times text-muted me-2"></i> LinkedIn Review (No)</li>
+                            </ul>
+                            <a href="{% url 'pricing' %}" class="btn btn-success mt-3">View Price</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card bg-white text-dark h-100 border-primary border-3">
+                        <div class="card-header bg-primary text-white fw-bold">Most Popular: Executive Package</div>
+                        <div class="card-body">
+                            <h4 class="fw-bold">All-in-One Career Booster</h4>
+                            <ul class="list-unstyled text-start small mt-3">
+                                <li><i class="fas fa-check text-success me-2"></i> ATS-Compliant CV</li>
+                                <li><i class="fas fa-check text-success me-2"></i> Full LinkedIn Optimization</li>
+                                <li><i class="fas fa-check text-success me-2"></i> One Targeted Cover Letter</li>
+                            </ul>
+                            <a href="{% url 'pricing' %}" class="btn btn-primary mt-3">View Price</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-5 bg-success text-white text-center">
+        <div class="container">
+            <h2 class="mb-3 fw-bold">Your Next Interview Starts Here.</h2>
+            <p class="lead mb-4">Stop applying and start getting hired. Schedule your free career assessment today.</p>
+            <a href="{% url 'bookings' %}?service=cv" class="btn btn-warning btn-lg shadow-lg">
+                <i class="fas fa-arrow-right me-2"></i> Schedule Assessment
+            </a>
+        </div>
+    </section>
+
+{% endblock %}

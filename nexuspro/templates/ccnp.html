@@ -1,0 +1,108 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}CCNP Advanced Training & Certification Labs | Nexus Pro Solutions{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 bg-info text-white bg-gradient">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">
+                CCNP Advanced Training: Master Enterprise Networks
+            </h1>
+            <p class="lead mb-4 mx-auto" style="max-width: 800px;">
+                Move beyond the fundamentals. Our CCNP-level training provides deep, hands-on mastery in advanced routing, switching, and core enterprise infrastructure, preparing you for senior engineering roles.
+            </p>
+            <a href="{% url 'bookings' %}?service=ccnp" class="btn btn-warning btn-lg me-3 shadow-lg">
+                <i class="fas fa-calendar-alt me-2"></i> Enroll Now & See Pricing
+            </a>
+            <a href="#curriculum" class="btn btn-outline-light btn-lg">
+                View Curriculum
+            </a>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 text-dark">Why Advanced Certification Matters Now</h2>
+            
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                    <h3 class="fs-4 fw-bold">Senior Engineer Readiness</h3>
+                    <p class="text-muted">CCNP validates the complex skills required for roles like Senior Network Engineer and Architect—opening high-salary doors.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-brain fa-3x text-primary mb-3"></i>
+                    <h3 class="fs-4 fw-bold">Deep Troubleshooting Mastery</h3>
+                    <p class="text-muted">Learn advanced fault isolation, complex path control, and real-world network optimization techniques.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-globe-africa fa-3x text-primary mb-3"></i>
+                    <h3 class="fs-4 fw-bold">Global Credibility</h3>
+                    <p class="text-muted">Gain a globally recognized credential that proves you can manage, configure, and secure the world's most demanding networks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="curriculum" class="py-5">
+        <div class="container">
+            <h2 class="fw-bold mb-4 border-bottom pb-2">CCNP Training: Hands-on Focus Areas</h2>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="p-4 rounded shadow-sm h-100 bg-light">
+                        <h3 class="fs-4 fw-bold text-info mb-3"><i class="fas fa-cogs me-2"></i> CCNP Core Technologies (CORE)</h3>
+                        <ul class="list-unstyled checklist">
+                            <li><i class="fas fa-check-circle text-success me-2"></i> Advanced IP Addressing and Routing (OSPF, EIGRP, BGP)</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i> Network Assurance and Troubleshooting Methodologies</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i> Wireless LAN deployment and Security (WLC setup)</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i> Core Lab Focus:Enterprise network design and implementation.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mb-4">
+                    <div class="p-4 rounded shadow-sm h-100 bg-light">
+                        <h3 class="fs-4 fw-bold text-info mb-3"><i class="fas fa-cube me-2"></i> CCNP Concentration Track (Example: ENARSI)</h3>
+                        <ul class="list-unstyled checklist">
+                            <li><i class="fas fa-check-circle text-success me-2"></i> Complex Layer 3 VPN Services (DMVPN, GET VPN)</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i> Advanced Cisco Enterprise Wireless Networking</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i> Infrastructure Security and Services (ACLs, SNMP, NetFlow)</li>
+                            <li><i class="fas fa-check-circle text-success me-2"></i> Concentration Lab Focus:Deep troubleshooting scenarios and service integration.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-center mt-4 fst-italic text-muted">
+                Our labs utilize real-world topologies, Cisco Packet Tracer, and GNS3/EVE-NG to simulate complex enterprise environments.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <h2 class="mb-3 fw-bold">Trained by a Certified CCNP Expert (Brian David Amai)</h2>
+            <p class="lead mb-4">Benefit from a personalized learning path with an instructor who actively works as an IT Engineer and consultant.</p>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="p-4 bg-secondary rounded">
+                        <h3 class="fs-4 fw-bold mb-3">Pricing & Next Start Date</h3>
+                        <p class="mb-3">View flexible payment options, group discounts, and the schedule for the next advanced training intake.</p>
+                        <a href="{% url 'pricing' %}" class="btn btn-warning btn-lg shadow-lg me-3">
+                            View Pricing Details
+                        </a>
+                        <a href="{% url 'contact' %}?subject=ccnp_intake" class="btn btn-outline-light btn-lg">
+                            Ask About Intake Dates
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

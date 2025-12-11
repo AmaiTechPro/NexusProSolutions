@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Schedule Your Session | Nexus Pro Solutions{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 bg-primary text-white text-center">
+        <div class="container">
+            <i class="fas fa-calendar-alt fa-3x mb-3 text-warning"></i>
+            <h1 class="display-5 fw-bold mb-1">
+                Schedule Your Consultation
+            </h1>
+            <p class="lead">Final step! Tell us what service you need and your availability.</p>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card p-4 shadow-lg">
+                        <h2 class="fw-bold mb-4 border-bottom pb-2 text-primary">Booking Details</h2>
+                        
+                        <form method="POST" action="{% url 'bookings' %}"> 
+                            {% csrf_token %}
+                            
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                            {% endif %}
+                            
+                            <p class="text-muted mb-4">Please select the service and provide brief details about your requirement. We will contact you to confirm the final time slot.</p>
+
+                            <div class="row g-3">
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.service_type.id_for_label }}" class="form-label fw-bold">1. Select Service Type</label>
+                                    {{ form.service_type|add_class:"form-select" }}
+                                    {% for error in form.service_type.errors %}<small class="text-danger d-block">{{ error }}</small>{% endfor %}
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.location.id_for_label }}" class="form-label fw-bold">2. Location (If On-Site)</label>
+                                    {{ form.location|add_class:"form-control"|attr:"placeholder:e.g., Nairobi CBD, Westlands office" }}
+                                    {% for error in form.location.errors %}<small class="text-danger d-block">{{ error }}</small>{% endfor %}
+                                    <small class="text-muted d-block mt-1">Leave blank for Remote/Online sessions.</small>
+                                </div>
+                                
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="{{ form.details.id_for_label }}" class="form-label fw-bold">3. Brief Description of Need</label>
+                                {{ form.details|add_class:"form-control"|attr:"rows:5"|attr:"placeholder:e.g., I need a crash course on OSPF, or My server is experiencing slow network speeds." }}
+                                {% for error in form.details.errors %}<small class="text-danger d-block">{{ error }}</small>{% endfor %}
+                            </div>
+
+                            <div class="alert alert-info">
+                                **Next Step:** After submitting this request, our team will review your needs and contact you via your registered email/phone number within 4 business hours to confirm a precise date and time for the session.
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i> Submit Booking Request
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-4 text-center">
+        <div class="container">
+            <p class="mb-0">Need immediate help? Call us at **+254 7XX XXX XXX**.</p>
+        </div>
+    </section>
+
+{% endblock %}
+

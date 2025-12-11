@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Bookings & Profile | Nexus Pro Solutions{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h1 class="display-5 fw-bold mb-1">
+                Welcome Back, {{ user.first_name|default:"Client" }}
+            </h1>
+            <p class="lead text-warning">Your Hub for Training, Support, and Advisory Sessions.</p>
+            
+            <ul class="nav nav-tabs border-0 mt-3" id="dashboardTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active bg-light text-dark rounded-top" id="bookings-tab" data-bs-toggle="tab" data-bs-target="#bookings-content" type="button" role="tab" aria-controls="bookings-content" aria-selected="true">
+                        <i class="fas fa-calendar-check me-2"></i> My Bookings & Sessions
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link bg-light text-dark rounded-top" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-content" type="button" role="tab" aria-controls="profile-content" aria-selected="false">
+                        <i class="fas fa-user-circle me-2"></i> Account Details
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="tab-content" id="dashboardTabsContent">
+
+                <div class="tab-pane fade show active" id="bookings-content" role="tabpanel" aria-labelledby="bookings-tab">
+                    <h2 class="fw-bold mb-4">Your Recent and Upcoming Sessions</h2>
+                    
+                    <div class="mb-4 d-flex justify-content-between">
+                        <span class="fw-bold">Showing: All Sessions (Upcoming & Completed)</span>
+                        <a href="{% url 'bookings' %}" class="btn btn-sm btn-primary">
+                            <i class="fas fa-plus me-2"></i> Book New Session
+                        </a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover align-middle shadow-sm bg-white rounded">
+                            <thead class="bg-dark text-white">
+                                <tr>
+                                    <th>Ref ID</th>
+                                    <th>Service Type</th>
+                                    <th>Status</th>
+                                    <th>Date/Time</th>
+                                    <th>Details</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% comment %}
+                                {% for booking in bookings %}
+                                <tr>
+                                    <td>#{{ booking.id }}</td>
+                                    <td>{{ booking.service_type|capfirst }}</td>
+                                    <td>
+                                        {% if booking.status == 'Confirmed' %}
+                                            <span class="badge bg-success">{{ booking.status }}</span>
+                                        {% elif booking.status == 'Pending' %}
+                                            <span class="badge bg-warning">{{ booking.status }}</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">{{ booking.status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ booking.session_date|date:"M d, Y" }} at {{ booking.session_time|time:"h:i A" }}</td>
+                                    <td>{{ booking.details|truncatechars:50 }}</td>
+                                    <td>
+                                        <a href="{% url 'booking_detail' booking.id %}" class="btn btn-sm btn-outline-info">View</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6" class="text-center py-4">
+                                        <i class="fas fa-calendar-times me-2"></i> You have no active bookings yet.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                {% endcomment %}
+                                
+                                <tr>
+                                    <td>#20251101</td>
+                                    <td>CCNP Training</td>
+                                    <td><span class="badge bg-success">Confirmed</span></td>
+                                    <td>Dec 20, 2025 at 02:00 PM</td>
+                                    <td>Advanced BGP and OSPF labs scheduled.</td>
+                                    <td><button class="btn btn-sm btn-outline-info">View</button></td>
+                                </tr>
+                                <tr>
+                                    <td>#20251025</td>
+                                    <td>On-Site Technician</td>
+                                    <td><span class="badge bg-secondary">Completed</span></td>
+                                    <td>Nov 28, 2025 at 10:30 AM</td>
+                                    <td>Office LAN troubleshooting and switch configuration.</td>
+                                    <td><button class="btn btn-sm btn-outline-info">View</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="profile-content" role="tabpanel" aria-labelledby="profile-tab">
+                    <h2 class="fw-bold mb-4">Your Account Information</h2>
+                    <div class="card p-4 shadow-sm">
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Full Name:</label>
+                                <p>{{ user.first_name }} {{ user.last_name }}</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Email:</label>
+                                <p>{{ user.email }}</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Phone/Contact:</label>
+                                <p>{{ user.profile.phone_number|default:"Not set" }}</p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Member Since:</label>
+                                <p>{{ user.date_joined|date:"M Y" }}</p>
+                            </div>
+                        </div>
+                        
+                        <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary mt-3 w-50">
+                            <i class="fas fa-edit me-2"></i> Edit Profile Details
+                        </a>
+                        <a href="{% url 'change_password' %}" class="btn btn-outline-danger mt-2 w-50">
+                            <i class="fas fa-lock me-2"></i> Change Password
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

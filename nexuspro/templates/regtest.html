@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Debug</title>
+</head>
+<body>
+    <h1>Registration Form Debug</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <h2>Full Form Dump:</h2>
+        {{ form.as_p }}
+        
+        <h2>Password Fields ONLY (Raw HTML):</h2>
+        
+        <p>Password Field Name: {{ form.password.name }}</p>
+        <p>Password Field Label: {{ form.password.label }}</p>
+        <p>Password Field Widget:</p>
+        
+        {{ form.password }} 
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

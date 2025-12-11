@@ -1,0 +1,127 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact Nexus Pro Solutions | Schedule Support or Advisory{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 bg-light text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold text-dark mb-3">
+                Let's Connect: Start Your Project or Training
+            </h1>
+            <p class="lead text-muted mx-auto" style="max-width: 800px;">
+                Reach out to the Nexus Pro team for urgent technical support, course enrollment, or professional advisory services. We respond within 24 hours.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-5">
+                
+                <div class="col-lg-7">
+                    <h2 class="fw-bold mb-4 border-bottom pb-2">Send Us a Direct Inquiry</h2>
+                    
+                    <form method="POST" action="{% url 'contact' %}" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="id_name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="id_name" name="name" required>
+                            <div class="invalid-feedback">Please enter your name.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="id_email" name="email" required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_service" class="form-label">Service Required</label>
+                            <select class="form-select" id="id_service" name="service_type" required>
+                                <option value="">--- Choose a Service ---</option>
+                                <option value="technical">Technical Training/Labs (CCNA/CCNP)</option>
+                                <option value="support">IT Infrastructure/Support (On-Site/Remote)</option>
+                                <option value="career">CV/Career Optimization</option>
+                                <option value="business">Business Reg. & Compliance</option>
+                                <option value="web_dev">Software/Web Development</option>
+                                <option value="general">General Inquiry</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a service category.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_message" class="form-label">Your Message / Project Details</label>
+                            <textarea class="form-control" id="id_message" name="message" rows="5" required></textarea>
+                            <div class="invalid-feedback">Please provide details about your request.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg mt-3">
+                            <i class="fas fa-paper-plane me-2"></i> Submit Inquiry
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="col-lg-5 bg-light p-4 rounded shadow-sm">
+                    <h2 class="fw-bold mb-4 border-bottom pb-2">Quick Contact Options</h2>
+                    
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fas fa-envelope fa-2x text-primary me-3"></i>
+                        <div>
+                            <p class="mb-0 fw-bold">Email Support</p>
+                            <a href="mailto:brian01tech@gmail.com" class="text-decoration-none text-dark">brian01tech@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center mb-4">
+                        <i class="fab fa-whatsapp fa-2x text-success me-3"></i>
+                        <div>
+                            <p class="mb-0 fw-bold">Instant Chat</p>
+                            <a href="https://wa.me/254745422895?text=Hello%20Nexus%20Pro%20Solutions,%20I%20am%20contacting%20you%20regarding%20your%20services.%20Please%20select%20an%20option%20below:%0A%0A1%E2%83%A3%20Technical%20Tutoring%20(CCNA/Cyber%20Security/Web)%0A2%E2%83%A3%20Professional%20Advisory%20(CV/LinkedIn/Business%20Reg)%0A3%E2%83%A3%20General%20Inquiry" 
+                               target="_blank" class="text-decoration-none text-dark">
+                                Chat with Expert Now
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="d-grid gap-2 mb-4">
+                        <h4 class="fw-bold">Need a Scheduled Meeting?</h4>
+                        <a href="{% url 'bookings' %}" class="btn btn-warning btn-lg">
+                            <i class="fas fa-calendar-alt me-2"></i> Book a 1-on-1 Consultation
+                        </a>
+                    </div>
+                    
+                    <h4 class="fw-bold mt-4">Connect Professionally</h4>
+                    <div class="d-flex justify-content-start">
+                        <a href="https://www.linkedin.com/in/your-linkedin-id" target="_blank" class="btn btn-outline-primary me-2"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                        <a href="https://www.facebook.com/your-facebook-id" target="_blank" class="btn btn-outline-primary me-2"><i class="fab fa-facebook-f"></i> Facebook</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-4">Serving Clients Across Kenya & Globally</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <p class="text-center text-muted">Based in Nairobi, we offer on-site technician services across major Kenyan cities and remote advisory/training globally.</p>
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+
+ <div class="ratio ratio-16x9 mt-4" style="height: 350px;">
+                        
+                    </div>

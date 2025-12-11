@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Cyber Security Services, Audits & Training | Nexus Pro Solutions{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 bg-danger text-white bg-gradient">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">
+                Cyber Security: Training, Vulnerability Assessment, and Hardening
+            </h1>
+            <p class="lead mb-4 mx-auto" style="max-width: 800px;">
+                Protect your assets and build your skills. We offer expert-led security training and actionable consulting services to safeguard your network from modern threats.
+            </p>
+            <a href="#consulting" class="btn btn-warning btn-lg me-3 shadow-lg">
+                <i class="fas fa-shield-alt me-2"></i> Book a Security Audit
+            </a>
+            <a href="#training" class="btn btn-outline-light btn-lg">
+                View Training Tracks
+            </a>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 text-dark">Choose Your Path: Consulting or Certification</h2>
+            
+            <div class="row g-4">
+                
+                <div class="col-lg-6">
+                    <div class="card h-100 p-4 shadow-lg border-start border-4 border-danger" id="consulting">
+                        <div class="card-body">
+                            <h3 class="fs-3 fw-bold text-danger mb-3"><i class="fas fa-search-dollar me-2"></i> Security Consulting & Audits</h3>
+                            <p class="card-text lead">For small businesses, startups, and individuals needing proactive defense and compliance checks.</p>
+                            
+                            <ul class="list-unstyled mt-3 checklist">
+                                <li><i class="fas fa-lock text-danger me-2"></i> **Vulnerability Assessment:** Identifying weaknesses in your current infrastructure.</li>
+                                <li><i class="fas fa-bug text-danger me-2"></i> **Penetration Testing (Basic Scope):** Ethical hacking to test network defenses.</li>
+                                <li><i class="fas fa-cogs text-danger me-2"></i> **Network Hardening:** Implementing essential security configurations on routers, firewalls, and servers.</li>
+                            </ul>
+                            <a href="{% url 'bookings' %}?service=security_audit" class="btn btn-danger btn-lg mt-3">Request a Security Quote</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card h-100 p-4 shadow-lg border-start border-4 border-primary" id="training">
+                        <div class="card-body">
+                            <h3 class="fs-3 fw-bold text-primary mb-3"><i class="fas fa-user-shield me-2"></i> Security Training & Certification Prep</h3>
+                            <p class="card-text lead">For those aiming to start or advance a career in cybersecurity, covering core concepts and tools.</p>
+                            
+                            <ul class="list-unstyled mt-3 checklist">
+                                <li><i class="fas fa-laptop-code text-primary me-2"></i> **Security Fundamentals:** Mastering cryptography, network security concepts, and access control.</li>
+                                <li><i class="fas fa-tools text-primary me-2"></i> **Ethical Hacking Tools:** Hands-on training with industry-standard assessment tools (Kali Linux basics).</li>
+                                <li><i class="fas fa-chart-bar text-primary me-2"></i> **Security Operations (SecOps) Basics:** Introduction to incident response and threat monitoring.</li>
+                            </ul>
+                            <a href="{% url 'contact' %}?subject=security_training" class="btn btn-primary btn-lg mt-3">Inquire About Training</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="consulting" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="fw-bold mb-4 border-bottom pb-2">Our 3-Step Vulnerability Assessment Process</h2>
+            <p class="lead mb-4">We deliver clear, actionable reports, not just complex jargon. Here’s how we secure your network:</p>
+            
+            
+
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <div class="p-4 bg-white rounded shadow-sm h-100">
+                        <h3 class="display-6 fw-bold text-danger">1. Scan & Identify</h3>
+                        <p>We use automated and manual techniques to scan your network perimeter, discovering all active assets and potential security weaknesses.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4 bg-white rounded shadow-sm h-100">
+                        <h3 class="display-6 fw-bold text-danger">2. Analyze & Prioritize</h3>
+                        <p>We validate the findings, prioritize risks based on exploitability and impact, and assign clear severity ratings (Critical, High, Medium).</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4 bg-white rounded shadow-sm h-100">
+                        <h3 class="display-6 fw-bold text-danger">3. Report & Remediate</h3>
+                        <p>You receive a professional, easy-to-understand report with step-by-step instructions for fixing every vulnerability found. We guide your team through remediation.</p>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <h2 class="mb-3 fw-bold">Don't Wait for a Breach. Protect Your Business Today.</h2>
+            <p class="lead mb-4">Proactive security is an investment, not an expense. Get an expert review now.</p>
+            <a href="{% url 'bookings' %}?service=security_audit" class="btn btn-warning btn-lg shadow-lg">
+                <i class="fas fa-lock me-2"></i> Schedule Your Confidential Audit
+            </a>
+        </div>
+    </section>
+
+{% endblock %}

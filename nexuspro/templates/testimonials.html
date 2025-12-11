@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Client Success Stories & Testimonials | Nexus Pro Solutions{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 bg-primary bg-gradient text-white text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-3">
+                Proven Results: What Our Clients Say
+            </h1>
+            <p class="lead mb-4 mx-auto" style="max-width: 800px;">
+                Our success is measured by yours. Read authentic feedback from individuals and businesses we've helped achieve their technical, career, and compliance goals.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5">Trusted by Students, Professionals, and SMEs</h2>
+
+            <div class="row g-4">
+                
+                {% comment %}
+                {% for testimonial in published_testimonials %}
+                    {% include 'nexuspro/includes/testimonial_card.html' with item=testimonial %}
+                {% endfor %}
+                {% endcomment %}
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 p-4 shadow-sm border-start border-5 border-info">
+                        <div class="card-body">
+                            <i class="fas fa-quote-left fa-2x text-info mb-3"></i>
+                            <p class="card-text fst-italic">"The CCNP advanced labs were a game-changer. The hands-on router configuration practice was exactly what I needed. I passed the exam on my first try and immediately applied the knowledge at work. Highly recommended!"</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <p class="mb-0 fw-bold">- Michael O.</p>
+                            <span class="badge bg-info">CCNP Training Client</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 p-4 shadow-sm border-start border-5 border-success">
+                        <div class="card-body">
+                            <i class="fas fa-quote-left fa-2x text-success mb-3"></i>
+                            <p class="card-text fst-italic">"My old CV was getting no traction. After Nexus Pro optimized it for ATS and tailored my LinkedIn profile, I started getting calls from major tech firms within a week. The investment paid off instantly!"</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <p class="mb-0 fw-bold">- Lilian W., Career Professional</p>
+                            <span class="badge bg-success">CV & LinkedIn Optimization</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 p-4 shadow-sm border-start border-5 border-danger">
+                        <div class="card-body">
+                            <i class="fas fa-quote-left fa-2x text-danger mb-3"></i>
+                            <p class="card-text fst-italic">"My small office network had been unreliable for months. Brian came on-site, configured the new switch, and fixed the slow speeds in under 3 hours. Fast, transparent, and expert service."</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <p class="mb-0 fw-bold">- David M., Small Business Owner</p>
+                            <span class="badge bg-danger">On-Site Network Technician</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 p-4 shadow-sm border-start border-5 border-primary">
+                        <div class="card-body">
+                            <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                            <p class="card-text fst-italic">"Nexus Pro built a clean, fast landing page for our new consultancy using Django. The deployment process was flawless, and the site ranks well on Google. Great technical execution!"</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <p class="mb-0 fw-bold">- Sarah A., Consultancy Founder</p>
+                            <span class="badge bg-primary">Software & Web Development</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 p-4 shadow-sm border-start border-5 border-warning">
+                        <div class="card-body">
+                            <i class="fas fa-quote-left fa-2x text-warning mb-3"></i>
+                            <p class="card-text fst-italic">"We used their service for KRA registration and compliance setup. It was seamless, affordable, and saved us the headache of navigating complex legal requirements. Total peace of mind."</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <p class="mb-0 fw-bold">- Kevin N., Startup Owner</p>
+                            <span class="badge bg-warning">Business Compliance Advisory</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 p-4 shadow-sm border-start border-5 border-secondary">
+                        <div class="card-body">
+                            <i class="fas fa-quote-left fa-2x text-secondary mb-3"></i>
+                            <p class="card-text fst-italic">"Brian provides our small international team with reliable remote help desk support. He's proactive, highly responsive, and fixes issues fast. Our go-to expert for IT outsourcing."</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <p class="mb-0 fw-bold">- Alex R., Remote Team Manager</p>
+                            <span class="badge bg-secondary">Remote IT & Network Support</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <h2 class="mb-3 fw-bold">Ready to Be Our Next Success Story?</h2>
+            <p class="lead mb-4">Let's start your journey to technical mastery or professional advancement today.</p>
+            <a href="{% url 'bookings' %}" class="btn btn-warning btn-lg shadow-lg me-3">
+                <i class="fas fa-calendar-alt me-2"></i> Book Your Session
+            </a>
+            <a href="{% url 'contact' %}?subject=testimonial" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-star me-2"></i> Submit Your Review
+            </a>
+        </div>
+    </section>
+
+{% endblock %}

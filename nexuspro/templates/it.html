@@ -1,0 +1,124 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Remote IT Support, Help Desk & Network Consulting | Nexus Pro Solutions{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 bg-secondary text-white bg-gradient">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">
+                Reliable Remote IT & Network Support Services
+            </h1>
+            <p class="lead mb-4 mx-auto" style="max-width: 800px;">
+                Secure, expert-level network troubleshooting, system monitoring, and managed help desk support for your business, delivered remotely by certified engineers. (Ideal for Upwork/Contract Clients)
+            </p>
+            <a href="{% url 'bookings' %}?service=remote_support" class="btn btn-warning btn-lg me-3 shadow-lg">
+                <i class="fas fa-headset me-2"></i> Request a Remote Service Quote
+            </a>
+            <a href="#packages" class="btn btn-outline-light btn-lg">
+                View Support Packages
+            </a>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 text-dark">Why Choose Nexus Pro for Remote Support?</h2>
+            
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <i class="fas fa-user-check fa-3x text-secondary mb-3"></i>
+                    <h3 class="fs-4 fw-bold">Certified Expertise</h3>
+                    <p class="text-muted">Access to CCNP and Cyber Security knowledge without the high cost of full-time senior staff.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-clock fa-3x text-secondary mb-3"></i>
+                    <h3 class="fs-4 fw-bold">Rapid Response Time</h3>
+                    <p class="text-muted">Guaranteed fast response for critical issues, minimizing downtime and maximizing productivity.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-globe fa-3x text-secondary mb-3"></i>
+                    <h3 class="fs-4 fw-bold">Global Coverage</h3>
+                    <p class="text-muted">Reliable remote support across time zones, perfect for international contracts and remote teams.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="services" class="py-5">
+        <div class="container">
+            <h2 class="fw-bold mb-4 border-bottom pb-2">Our Key Remote Management Services</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="p-4 rounded shadow-sm h-100 border-start border-4 border-secondary">
+                        <i class="fas fa-network-wired fa-2x text-secondary mb-3"></i>
+                        <h3 class="fs-5 fw-bold">Managed Network Infrastructure</h3>
+                        <p class="text-muted">Remote configuration, monitoring, and proactive maintenance for routers, switches, and VPN tunnels.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="p-4 rounded shadow-sm h-100 border-start border-4 border-secondary">
+                        <i class="fas fa-desktop fa-2x text-secondary mb-3"></i>
+                        <h3 class="fs-5 fw-bold">Tier 1 & Tier 2 Help Desk Support</h3>
+                        <p class="text-muted">Troubleshooting software issues, setting up user accounts, managing permissions, and general system support.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="p-4 rounded shadow-sm h-100 border-start border-4 border-secondary">
+                        <i class="fas fa-lock fa-2x text-secondary mb-3"></i>
+                        <h3 class="fs-5 fw-bold">Security Monitoring & Patching</h3>
+                        <p class="text-muted">Remote application of security patches, firewall policy updates, and vulnerability remediation.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="p-4 rounded shadow-sm h-100 border-start border-4 border-secondary">
+                        <i class="fas fa-cloud fa-2x text-secondary mb-3"></i>
+                        <h3 class="fs-5 fw-bold">Cloud & Server Administration</h3>
+                        <p class="text-muted">Remote administration of Linux/Windows servers, cloud hosting environments, and application deployment (e.g., Django apps).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="packages" class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <h2 class="fw-bold mb-5">Flexible Remote Support Packages</h2>
+            
+            <div class="row justify-content-center g-4">
+                <div class="col-md-4">
+                    <div class="p-4 rounded shadow-lg h-100 bg-white text-dark">
+                        <h4 class="fw-bold text-secondary">Hourly / Ad-Hoc Support</h4>
+                        <p class="small text-muted">Ideal for one-time fixes or project-based tasks (e.g., specific router configuration).</p>
+                        <a href="{% url 'pricing' %}" class="btn btn-outline-secondary mt-3">View Hourly Rates</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="p-4 rounded shadow-lg h-100 bg-warning text-dark border-primary border-3">
+                        <h4 class="fw-bold">Managed Monthly Contract</h4>
+                        <p class="small">Best value for ongoing help desk, monitoring, and proactive maintenance tasks.</p>
+                        <a href="{% url 'pricing' %}" class="btn btn-primary mt-3">View Contract Pricing</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-5 bg-secondary text-white text-center">
+        <div class="container">
+            <h2 class="mb-3 fw-bold">Ready to Outsource Your IT Headaches?</h2>
+            <p class="lead mb-4">Secure your systems and offload technical burdens to a certified remote expert.</p>
+            <a href="{% url 'bookings' %}?service=remote_support" class="btn btn-warning btn-lg shadow-lg">
+                <i class="fas fa-arrow-right me-2"></i> Discuss Your Support Needs
+            </a>
+        </div>
+    </section>
+
+{% endblock %}

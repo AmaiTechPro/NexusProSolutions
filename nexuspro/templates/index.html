@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}IT Mastery & Professional Advisory Services - Nexus Pro Solutions{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 text-center text-white bg-primary bg-gradient" style="background-image: url('{% static 'img/hero-bg-network.jpg' %}'); background-size: cover;">
+        <div class="container py-5">
+            <h1 class="display-4 fw-bold mb-3">
+                Bridging IT Mastery & Career Success in Kenya
+            </h1>
+            <p class="lead mb-4">
+                Your Central Hub for Expert CCNA Labs, Cyber Security Consulting, and Professional Career Optimization (CV, LinkedIn, Business Registration).
+            </p>
+            <a href="{% url 'bookings' %}" class="btn btn-warning btn-lg me-3 shadow-lg">
+                <i class="fas fa-calendar-alt me-2"></i> Book Your Expert Session Today
+            </a>
+            <a href="#services-overview" class="btn btn-outline-light btn-lg">
+                Explore All Services
+            </a>
+        </div>
+    </section>
+    
+    <section id="services-overview" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 display-5 fw-bold text-dark">
+                Our Core Solutions for Growth
+            </h2>
+
+            <div class="row g-4">
+    
+             <div class="col-md-6 col-lg-3">
+               <div class="card h-100 shadow-sm border-0 text-center">
+                <div class="card-body">
+                <i class="fas fa-code fa-3x text-info mb-3"></i>
+                <h3 class="card-title fw-bold fs-5">Software & Web Development</h3>
+               <p class="card-text text-muted">Custom web building, hosting setup, and seamless deployment strategies for modern, scalable online platforms.</p>
+            <a href="{% url 'web' %}" class="btn btn-sm btn-outline-info mt-2">Start Your Project</a>
+            </div>
+         </div>
+      </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0 text-center">
+                        <div class="card-body">
+                            <i class="fas fa-network-wired fa-3x text-primary mb-3"></i>
+                            <h3 class="card-title fw-bold fs-5">Technical Tutoring & Labs</h3>
+                            <p class="card-text text-muted">Hands-on CCNA Labs, Network Configuration, and foundational IT skills training designed for certification success.</p>
+                            <a href="{% url 'network' %}" class="btn btn-sm btn-outline-primary mt-2">View Details & Pricing</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6 col-lg-3">
+    <div class="card h-100 shadow-sm border-0 text-center">
+        <div class="card-body">
+            <i class="fas fa-microchip fa-3x text-info mb-3"></i>
+            <h3 class="card-title fw-bold fs-5">CCNP Advanced Level Training</h3>
+            <p class="card-text text-muted">Master CCNP Enterprise, advanced routing protocols (EIGRP, OSPF), complex troubleshooting, and core network architecture.</p>
+            <a href="{% url 'ccnp' %}" class="btn btn-sm btn-outline-info mt-2">Explore Advanced Tracks</a>
+        </div>
+    </div>
+</div>
+
+
+
+                <div class="col-md-6 col-lg-3">
+             <div class="card h-100 shadow-sm border-0 text-center">
+             <div class="card-body">
+                <i class="fas fa-headset fa-3x text-success mb-3"></i>
+                <h3 class="card-title fw-bold fs-5">Remote IT & Help Desk Support</h3>
+                <p class="card-text text-muted">Reliable remote troubleshooting, system monitoring, and managed IT support tailored for long-term contract clients.</p>
+                <a href="{% url 'it' %}" class="btn btn-sm btn-outline-success mt-2">Request Remote Quote</a>
+            </div>
+            </div>
+             </div>
+
+
+
+             <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm border-0 text-center">
+            <div class="card-body">
+                <i class="fas fa-cogs fa-3x text-danger mb-3"></i>
+                <h3 class="card-title fw-bold fs-5">On-Site Network Technician</h3>
+                <p class="card-text text-muted">Local, hands-on configuration of physical routers, switches, and full LAN setup for homes and small businesses.</p>
+                <a href="{% url 'technician' %}" class="btn btn-sm btn-outline-danger mt-2">Book Local Service</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0 text-center">
+                        <div class="card-body">
+                            <i class="fas fa-shield-alt fa-3x text-danger mb-3"></i>
+                            <h3 class="card-title fw-bold fs-5">Cyber Security Consulting</h3>
+                            <p class="card-text text-muted">Vulnerability assessments, penetration testing, and strategic security advisory for businesses and individuals.</p>
+                            <a href="{% url 'security' %}" class="btn btn-sm btn-outline-danger mt-2">Secure Your Future</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0 text-center">
+                        <div class="card-body">
+                            <i class="fas fa-user-tie fa-3x text-success mb-3"></i>
+                            <h3 class="card-title fw-bold fs-5">CV & Career Advisory</h3>
+                            <p class="card-text text-muted">ATS-optimized CV writing, application letter drafting, and professional LinkedIn profile enhancement.</p>
+                            <a href="{% url 'career' %}" class="btn btn-sm btn-outline-success mt-2">Elevate Your Career</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0 text-center">
+                        <div class="card-body">
+                            <i class="fas fa-chart-line fa-3x text-info mb-3"></i>
+                            <h3 class="card-title fw-bold fs-5">Business Registration & Compliance</h3>
+                            <p class="card-text text-muted">Expert guidance on KRA compliance, business registration, and navigating the legal landscape in Kenya.</p>
+                            <a href="{% url 'registration' %}" class="btn btn-sm btn-outline-info mt-2">Start Your Business</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!----TESTIMONIALS-->
+
+{% for t in testimonials %}
+<div class="col">
+    <div class="card h-100 shadow-sm border-0">
+        <div class="card-body d-flex flex-column">
+            <div class="mb-3 text-warning">
+                {% for i in ""|center:5 %} 
+                    {% if forloop.counter <= t.rating %}
+                        <i class="fas fa-star"></i>
+                    {% else %}
+                        <i class="far fa-star"></i>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            
+            </div>
+    </div>
+</div>
+{% endfor %}
+
+    <!----END TESTIMONIALS---->
+
+
+
+
+
+
+
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 display-5">Why Choose Nexus Pro Solutions?</h2>
+            
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="flex-shrink-0 me-3">
+                            <i class="fas fa-check-circle fa-2x text-primary"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h3 class="fs-4 fw-bold">Certified Expertise (CCNA, Security)</h3>
+                            <p class="text-muted">Our tutors and consultants hold the industry-leading certifications and real-world experience to guarantee relevant training and advice.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="flex-shrink-0 me-3">
+                            <i class="fas fa-hands-helping fa-2x text-primary"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h3 class="fs-4 fw-bold">Holistic Growth Model</h3>
+                            <p class="text-muted">We don't just teach tech; we bridge it to your career. Get the skills, the CV, and the professional presence you need to succeed.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start">
+                        <div class="flex-shrink-0 me-3">
+                            <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h3 class="fs-4 fw-bold">Kenya-Specific Compliance</h3>
+                            <p class="text-muted">Expert handling of local KRA and Business Registration requirements, ensuring your ventures start correctly and legally.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <h2 class="mb-3 fw-bold">Ready to Elevate Your Skills or Business?</h2>
+            <p class="lead mb-4">Schedule a free initial consultation to discuss your specific goals.</p>
+            <a href="{% url 'bookings' %}" class="btn btn-warning btn-lg shadow-lg">
+                <i class="fas fa-headset me-2"></i> Get Started Now
+            </a>
+        </div>
+    </section>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

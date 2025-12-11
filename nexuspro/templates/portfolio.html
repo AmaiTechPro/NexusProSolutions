@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Portfolio & Case Studies | Nexus Pro Solutions{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 bg-light text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold text-dark mb-3">
+                See Our Work: Results in Code, Networks, and Careers
+            </h1>
+            <p class="lead text-muted mx-auto" style="max-width: 800px;">
+                We don't just promise results—we prove them. Explore selected projects across web development, IT infrastructure deployments, and advisory success stories.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+
+
+            <ul class="nav nav-pills nav-fill mb-5" id="portfolioTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="web-tab" data-bs-toggle="tab" data-bs-target="#web-content" type="button" role="tab" aria-controls="web-content" aria-selected="true">
+            <i class="fas fa-code me-2"></i> Web & Software Development
+        </button>
+    </li>
+          
+
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="network-tab" data-bs-toggle="tab" data-bs-target="#network-content" type="button" role="tab" aria-controls="network-content" aria-selected="false">
+            <i class="fas fa-network-wired me-2"></i> Networking & Infrastructure
+        </button>
+    </li>
+            
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="advisory-tab" data-bs-toggle="tab" data-bs-target="#advisory-content" type="button" role="tab" aria-controls="advisory-content" aria-selected="false">
+                        <i class="fas fa-user-tie me-2"></i> Advisory & Career Success
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="portfolioTabsContent">
+
+                <div class="tab-pane fade show active" id="web-content" role="tabpanel" aria-labelledby="web-tab">
+                    <div class="row g-4">
+                        {% include 'nexuspro/includes/project_card.html' with title="E-Commerce API Integration" service="Django/React" results="30% Faster Checkout" url="#" image_url="img/project_ecommerce.png" %}
+                        
+                        {% include 'nexuspro/includes/project_card.html' with title="Local Consultancy Landing Page" service="Django/Bootstrap" results="50+ Leads Generated" url="#" image_url="img/project_landing.png" %}
+                        
+                        {% include 'nexuspro/includes/project_card.html' with title="Data Analysis Dashboard" service="Python/PostgreSQL" results="Real-time Reporting" url="#" image_url="img/project_dashboard.png" %}
+
+                        {% comment %} 
+                        {% if not web_projects %}
+                        <div class="col-12 text-center py-5">
+                            <p class="lead">No projects currently displayed. Ready to be our next success story?</p>
+                            <a href="{% url 'web' %}" class="btn btn-primary">Start Your Web Project</a>
+                        </div>
+                        {% endif %} 
+                        {% endcomment %}
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="network-content" role="tabpanel" aria-labelledby="network-tab">
+                    <div class="row g-4">
+                        {% include 'nexuspro/includes/case_study_card.html' with title="SME Office Network Overhaul" service="Router/Switch Configuration" results="99.9% Uptime, Reduced Latency" client="Small Business Nairobi" url="#" %}
+                        
+                        {% include 'nexuspro/includes/case_study_card.html' with title="Vulnerability Assessment & Hardening" service="Cyber Security" results="Fixed 12 Critical Vulnerabilities" client="Regional Startup" url="#" %}
+                        
+                        {% include 'nexuspro/includes/case_study_card.html' with title="Remote Firewall Configuration" service="Network Support" results="Seamless Remote Access" client="International Client" url="#" %}
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="advisory-content" role="tabpanel" aria-labelledby="advisory-tab">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 p-4 border-success shadow-sm">
+                                <i class="fas fa-briefcase fa-2x text-success mb-3"></i>
+                                <h4 class="card-title fw-bold">Career Shift Success: Networking to DevOps</h4>
+                                <p class="card-text">"After optimizing my CV and LinkedIn with Nexus Pro, I landed three interviews in 10 days and secured a mid-level DevOps role."</p>
+                                <p class="fw-bold mt-2 text-success">- Lilian K., Nairobi</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 p-4 border-primary shadow-sm">
+                                <i class="fas fa-file-invoice fa-2x text-primary mb-3"></i>
+                                <h4 class="card-title fw-bold">Swift Business Registration & Compliance</h4>
+                                <p class="card-text">"Nexus Pro handled the entire KRA registration process for my consultancy, saving me weeks of paperwork and confusion."</p>
+                                <p class="fw-bold mt-2 text-primary">- Thomas M., Mombasa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-5 bg-dark text-white text-center">
+        <div class="container">
+            <h2 class="mb-3 fw-bold">Ready for Nexus Pro Solutions to Deliver Your Results?</h2>
+            <p class="lead mb-4">Let's discuss how our technical expertise and strategic advisory services can drive your next big success.</p>
+            <a href="{% url 'bookings' %}" class="btn btn-warning btn-lg shadow-lg">
+                <i class="fas fa-calendar-alt me-2"></i> Start a Project
+            </a>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,120 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Business Registration, KRA Compliance & Advisory in Kenya | Nexus Pro Solutions{% endblock %}
+
+{% block content %}
+
+    <section class="py-5 bg-warning text-dark bg-gradient">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">
+                Seamless Business Registration & KRA Compliance in Kenya
+            </h1>
+            <p class="lead mb-4 mx-auto" style="max-width: 800px;">
+                Start your venture legally and correctly. We handle the paperwork, statutory requirements, KRA registration, and full business incorporation so you can focus on growth.
+            </p>
+            <a href="{% url 'bookings' %}?service=biz_reg" class="btn btn-primary btn-lg me-3 shadow-lg">
+                <i class="fas fa-file-invoice me-2"></i> Get Started with Registration
+            </a>
+            <a href="#services" class="btn btn-outline-dark btn-lg">
+                View All Services
+            </a>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 text-dark">Avoid Costly Delays & Compliance Errors</h2>
+            
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6">
+                    <h3 class="fs-4 fw-bold mb-3">The Complexity of Kenyan Regulations</h3>
+                    <p class="lead">Navigating the registration process, understanding tax obligations, and ensuring continuous compliance can be overwhelming and lead to penalties.</p>
+                    <ul class="list-unstyled checklist">
+                        <li class="mb-3"><i class="fas fa-exclamation-triangle text-danger me-2"></i> Risk: Incorrect KRA pin application or filing errors.</li>
+                        <li class="mb-3"><i class="fas fa-clock text-danger me-2"></i> Delay:Weeks wasted correcting paperwork and visiting offices.</li>
+                        <li class="mb-3"><i class="fas fa-check-circle text-success me-2"></i> Our Promise:Efficient, error-free processing with clear guidance every step of the way.</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <p><b>A Simplified Business Registration Workflow Flowchart</b></p>
+                    <img src="{% static 'img/workflow.png' %}" alt="WORKFLOW"
+                    
+                    
+                    style="width:500px ;height: 280px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-5">
+        <div class="container">
+            <h2 class="fw-bold mb-4 border-bottom pb-2">Comprehensive Registration & Advisory Services</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="p-4 rounded shadow-sm h-100 border-top border-4 border-primary">
+                        <i class="fas fa-sitemap fa-3x text-primary mb-3"></i>
+                        <h3 class="fs-4 fw-bold">Business Name & Company Registration</h3>
+                        <p class="text-muted">Full handling of name search, registration documents, and official incorporation for sole proprietorships and limited companies.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="p-4 rounded shadow-sm h-100 border-top border-4 border-primary">
+                        <i class="fas fa-calculator fa-3x text-primary mb-3"></i>
+                        <h3 class="fs-4 fw-bold">KRA PIN & Tax Compliance Setup</h3>
+                        <p class="text-muted">Assistance with obtaining KRA PIN, VAT, Income Tax registration, and setup for annual filing requirements.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="p-4 rounded shadow-sm h-100 border-top border-4 border-primary">
+                        <i class="fas fa-gavel fa-3x text-primary mb-3"></i>
+                        <h3 class="fs-4 fw-bold">Statutory & Licensing Advisory</h3>
+                        <p class="text-muted">Guidance on necessary licenses (e.g., County Permits) and setting up NSSF/NHIF compliance for new hires.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-dark text-white">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5">Our Simplified 3-Step Registration Process</h2>
+            
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="p-4 border rounded h-100">
+                        <h3 class="display-6 fw-bold text-warning">1. Brief & Review</h3>
+                        <p>We discuss your business model and required structure (LTD, Sole Prop) to ensure the correct path is chosen.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4 border rounded h-100">
+                        <h3 class="display-6 fw-bold text-warning">2. Documentation & Filing</h3>
+                        <p>You provide basic documents; we handle all form preparation, online filing, and follow-up with relevant authorities.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4 border rounded h-100">
+                        <h3 class="display-6 fw-bold text-warning">3. Handover & Next Steps</h3>
+                        <p>We hand over your official certificates, KRA documents, and a clear guide on your ongoing compliance obligations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-5 bg-warning text-dark text-center">
+        <div class="container">
+            <h2 class="mb-3 fw-bold">Stop Waiting. Start Operating Legally Today.</h2>
+            <p class="lead mb-4">Minimize bureaucracy and ensure total compliance from day one.</p>
+            <a href="{% url 'bookings' %}?service=biz_reg" class="btn btn-primary btn-lg shadow-lg">
+                <i class="fas fa-arrow-right me-2"></i> Book Your Compliance Consultation
+            </a>
+        </div>
+    </section>
+
+{% endblock %}
