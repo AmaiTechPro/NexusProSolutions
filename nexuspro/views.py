@@ -8,7 +8,7 @@ from .forms import (
     ProfileEditForm, 
     BookingForm
 )
-from .models import Booking, Profile 
+from .models import Appointment, Booking, Profile, Testimonial # Ensure Testimonial is imported
 
 
 # ======================================================================
@@ -16,7 +16,15 @@ from .models import Booking, Profile
 # ======================================================================
 
 def index(request):
-    return render(request, 'index.html')
+    """Home Page - Now passes dynamically approved testimonials."""
+    
+    # Fetch only testimonials that have been approved by the Admin
+    approved_testimonials = Testimonial.objects.filter(is_approved=True).order_by('-rating', '?')[:6]
+    
+    context = {
+        'testimonials': approved_testimonials
+    }
+    return render(request, 'index.html', context)
 
 def base(request):
     return render(request, 'base.html')
@@ -30,8 +38,10 @@ def registration(request):
 def schedule(request):
     return render(request, 'schedule.html')
 
+
 def bookings(request):
     return render(request, 'bookings.html')
+
 
 def profile(request):
     return render(request, 'profile.html')
@@ -40,8 +50,7 @@ def profile(request):
 def it(request):
     return render(request, 'it.html')
 
-def editprofile(request):
-    return render(request, 'edit_profile.html')
+# REMOVED: def editprofile(request): placeholder function to avoid conflict
 
 def about(request):
     return render(request, 'about.html')
@@ -61,10 +70,15 @@ def privacy(request):
 def terms(request):
     return render(request, 'terms.html')
 
-def contact(request):
-    return render(request, 'contact.html')
 
-# Service/General Pages (Kept the descriptive names where functional logic is elsewhere)
+
+
+
+
+
+
+
+# Service/General Pages
 def ccnp(request):
     return render(request, 'ccnp.html')
 
@@ -80,7 +94,7 @@ def technician(request):
 def web(request):
     return render(request, 'web.html')
 
-# The following views are placeholders for templates, but we use Django Auth views for the logic:
+# Password Reset Placeholder Templates
 def passwordform(request):
     return render(request, 'password_reset_form.html')
 
@@ -95,7 +109,6 @@ def passwordcomplete(request):
 
 # ======================================================================
 # B. Authentication & Registration Views (Functional)
-#    - Note: login and logout views are now handled entirely in urls.py
 # ======================================================================
 
 def register_view(request):
@@ -128,15 +141,22 @@ def profile_view(request):
     }
     return render(request, 'profile.html', context) 
 
-
+# **CONSOLIDATED AND CORRECTED edit_profile_view**
 @login_required
 @transaction.atomic
 def edit_profile_view(request):
     """Handles editing of User and Profile details."""
     
+    # Check if the user has a profile (crucial check, though signals should handle it)
+    try:
+        user_profile = request.user.profile
+    except Profile.DoesNotExist:
+        messages.error(request, "Your profile data is missing. Please contact support.")
+        return redirect('profile')
+
     if request.method == 'POST':
         user_form = UserEditForm(request.POST, instance=request.user)
-        profile_form = ProfileEditForm(request.POST, request.FILES, instance=request.user.profile)
+        profile_form = ProfileEditForm(request.POST, request.FILES, instance=user_profile)
         
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -144,14 +164,17 @@ def edit_profile_view(request):
             messages.success(request, 'Your profile has been updated successfully!')
             return redirect('profile') 
     else:
+        # CRITICAL: These lines fetch the existing data from the database
         user_form = UserEditForm(instance=request.user)
-        profile_form = ProfileEditForm(instance=request.user.profile)
+        profile_form = ProfileEditForm(instance=user_profile)
         
     context = {
         'user_form': user_form,
         'profile_form': profile_form
     }
+    # This renders the edit_profile.html template with the forms in the context
     return render(request, 'edit_profile.html', context)
+
 
 # ======================================================================
 # D. Booking View (Functional)
@@ -178,58 +201,36 @@ def book_consultation_view(request):
         form = BookingForm(initial=initial_data)
         
     context = {'form': form}
-    # IMPORTANT: Ensure this maps to your booking form template
     return render(request, 'bookings.html', context)
 
 
 
 
 
+ 
 
 
 
-# nexuspro/views.py (Locate and update the index view)
-
-from .models import Testimonial # Ensure Testimonial is imported here
-
-# ... (other view definitions) ...
-
-def index(request):
-    """Home Page - Now passes dynamically approved testimonials."""
-    
-    # Fetch only testimonials that have been approved by the Admin
-    approved_testimonials = Testimonial.objects.filter(is_approved=True).order_by('-rating', '?')[:6]
-    
-    context = {
-        'testimonials': approved_testimonials
-    }
-    return render(request, 'index.html', context)
-
-
-
-
-
-
-
-
-
-
-#REGTEST
-
-# nexuspro/views.py (TEMPORARY DEBUG VIEW)
-
-def regtest(request):
-    # ... (Keep form creation logic)
+def contact(request):
     if request.method == 'POST':
-        # ... (POST logic)
-        pass
-    else:
-        form = UserAndProfileCreationForm()
+        # 1. Capture data from the manual inputs
+        fullname = request.POST.get('fullname')
+        email = request.POST.get('email')
+        service = request.POST.get('service')
+        message = request.POST.get('message')
         
-    context = {'form': form}
+        # 2. Validate and Save to your Appointment Model
+        if fullname and email and service and message:
+            Appointment.objects.create(
+                fullname=fullname,
+                email=email,
+                service=service, # Ensure 'service' matches your model field
+                message=message
+            )
+            messages.success(request, 'Your request has been successfully submitted! We will contact you shortly.')
+            return redirect('contact') # Redirect to the same page
+        else:
+            messages.error(request, 'Please fill out all required fields.')
     
-    # CRITICAL CHANGE: Use the DEBUG template
-    return render(request, 'regtest.html', context) # <--- CHANGE TEMPLATE HERE
-
-
-#ENDTESTREG
+    # Render the template (for GET requests or failed POST requests)
+    return render(request, 'contact.html')

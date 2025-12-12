@@ -56,10 +56,9 @@ urlpatterns = [
 
     path('technician/', views.technician, name ="technician"),
 
-    path('editprofile/', views.editprofile, name ="edit_profile"),
+    path('editprofile/', views.edit_profile_view, name ="edit_profile"),
 
- #TEST
-  path('regtest/', views.regtest, name ="regtest"),
+
 
 
 
@@ -104,6 +103,7 @@ urlpatterns = [
     # 2e. Edit Profile (Functional View)
     path('editprofile/', views.edit_profile_view, name ="edit_profile"),
 
+
     # 2f. Change Password (Built-in View, Corrected Template)
     path('change_password/', auth_views.PasswordChangeView.as_view(
         template_name='change_password.html', # <- Corrected template name
@@ -138,3 +138,30 @@ urlpatterns = [
         template_name='password_reset_complete.html'
     ), name='password_reset_complete'),
 ]
+
+
+# urls.py (Top of the file)
+
+from django.contrib import admin
+# ... other imports ...
+
+# ======================================================================
+# ADMIN SITE CUSTOMIZATION
+# ======================================================================
+admin.site.site_header = "Nexus Pro Solutions Administration"
+admin.site.site_title = "Nexus Pro Admin Portal"
+admin.site.index_title = "Welcome to the Nexus Pro Admin Space"
+
+# ... rest of your urlpatterns = [...] list ...
+
+
+
+
+
+
+
+
+
+
+
+

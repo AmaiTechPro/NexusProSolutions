@@ -1,71 +1,85 @@
-
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Contact Nexus Pro Solutions | Schedule Support or Advisory{% endblock %}
+{% block title %}Contact Us & Request Consultation | Nexus Pro Solutions{% endblock %}
 
 {% block content %}
 
-    <section class="py-5 bg-light text-center">
+    <section class="py-5 bg-warning text-dark text-center">
         <div class="container">
-            <h1 class="display-4 fw-bold text-dark mb-3">
-                Let's Connect: Start Your Project or Training
+            <h1 class="display-4 fw-bold mb-3">
+                Get in Touch with Nexus Pro
             </h1>
-            <p class="lead text-muted mx-auto" style="max-width: 800px;">
-                Reach out to the Nexus Pro team for urgent technical support, course enrollment, or professional advisory services. We respond within 24 hours.
+            <p class="lead mx-auto" style="max-width: 800px;">
+                Ready to start your training, book support, or discuss a project? Send us a message and we'll respond within 4 business hours.
             </p>
         </div>
     </section>
 
-    <section class="py-5">
+    <section class="py-5 bg-light">
         <div class="container">
             <div class="row g-5">
-                
+
                 <div class="col-lg-7">
-                    <h2 class="fw-bold mb-4 border-bottom pb-2">Send Us a Direct Inquiry</h2>
-                    
-                    <form method="POST" action="{% url 'contact' %}" class="needs-validation" novalidate>
-                        {% csrf_token %}
-                        
-                        <div class="mb-3">
-                            <label for="id_name" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="id_name" name="name" required>
-                            <div class="invalid-feedback">Please enter your name.</div>
-                        </div>
+                    <div class="card p-4 shadow-lg">
+                        <h2 class="fw-bold mb-4 border-bottom pb-2 text-primary">Send Us a Message</h2>
 
-                        <div class="mb-3">
-                            <label for="id_email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="id_email" name="email" required>
-                            <div class="invalid-feedback">Please enter a valid email address.</div>
-                        </div>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
 
-                        <div class="mb-3">
-                            <label for="id_service" class="form-label">Service Required</label>
-                            <select class="form-select" id="id_service" name="service_type" required>
-                                <option value="">--- Choose a Service ---</option>
-                                <option value="technical">Technical Training/Labs (CCNA/CCNP)</option>
-                                <option value="support">IT Infrastructure/Support (On-Site/Remote)</option>
-                                <option value="career">CV/Career Optimization</option>
-                                <option value="business">Business Reg. & Compliance</option>
-                                <option value="web_dev">Software/Web Development</option>
-                                <option value="general">General Inquiry</option>
-                            </select>
-                            <div class="invalid-feedback">Please select a service category.</div>
-                        </div>
+                        <form method="POST" action="{% url 'contact' %}">
+                            {% csrf_token %}
 
-                        <div class="mb-3">
-                            <label for="id_message" class="form-label">Your Message / Project Details</label>
-                            <textarea class="form-control" id="id_message" name="message" rows="5" required></textarea>
-                            <div class="invalid-feedback">Please provide details about your request.</div>
-                        </div>
+                            <div class="mb-3">
+                                <label for="id_fullname" class="form-label">Your Full Name</label>
+                                <input type="text" class="form-control" id="id_fullname" name="fullname" required 
+                                       placeholder="e.g., Brian Ochieng">
+                            </div>
 
-                        <button type="submit" class="btn btn-primary btn-lg mt-3">
-                            <i class="fas fa-paper-plane me-2"></i> Submit Inquiry
-                        </button>
-                    </form>
+                            <div class="mb-3">
+                                <label for="id_email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="id_email" name="email" required 
+                                       placeholder="you@example.com">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="id_service" class="form-label">Primary Interest / Service Needed</label>
+                                <select class="form-select" id="id_service" name="service" required>
+                                    <option value="" disabled selected>Select an area of interest</option>
+                                    <option value="Training">Networking & IT Training</option>
+                                    <option value="Support">Technical Support (On-site/Remote)</option>
+                                    <option value="Software">Software & Web Development</option>
+                                    <option value="Advisory">Career Guidance & Advisory</option>
+                                    <option value="General">General Inquiry</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="id_message" class="form-label">Your Message / Request Details</label>
+                                <textarea class="form-control" id="id_message" name="message" rows="5" required 
+                                          placeholder="Tell us exactly what you need help with or what you'd like to book."></textarea>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i> Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                
-                <div class="col-lg-5 bg-light p-4 rounded shadow-sm">
+
+
+
+<!---Test-->
+
+ <div class="col-lg-5 bg-light p-4 rounded shadow-sm">
                     <h2 class="fw-bold mb-4 border-bottom pb-2">Quick Contact Options</h2>
                     
                     <div class="d-flex align-items-center mb-4">
@@ -125,3 +139,16 @@
  <div class="ratio ratio-16x9 mt-4" style="height: 350px;">
                         
                     </div>
+
+
+
+
+
+
+
+
+<!---ENDTEST-->
+
+
+
+

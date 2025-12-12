@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 # Ensure all your models are imported from your local models.py
-from .models import Booking, Profile, Testimonial, Register 
+from .models import Appointment, Booking, Profile, Testimonial, Register 
 
 # ----------------------------------------------------------------------
 # 1. Custom Admin Class for Testimonials (Using the decorator)
@@ -45,3 +45,4 @@ admin.site.register(Booking)
 # Register the Register model (Assuming this is an old or temporary model.
 # If you fully moved to Django's built-in User/Profile, you might want to delete this later.)
 admin.site.register(Register)
+admin.site.register(Appointment)

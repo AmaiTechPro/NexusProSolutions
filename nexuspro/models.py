@@ -121,7 +121,14 @@ class Testimonial(models.Model):
 
 
 
+class Appointment(models.Model):
+    fullname =models.CharField()
+    email = models.EmailField()
+    service =models.CharField()
+    message =models.TextField()
 
+    def __str__(self):
+        return (self.fullname)
 
 
 
