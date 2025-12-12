@@ -47,7 +47,7 @@ urlpatterns = [
 
     path('submit-testimonial/', views.submit_testimonial_view, name='submit_testimonial'),
 
-    path('profile/', views.profile, name ="profile"),
+   path('profile/', views.profile, name ="profile"),
 
 
     path('ccnp/', views.ccnp, name ="ccnp"),

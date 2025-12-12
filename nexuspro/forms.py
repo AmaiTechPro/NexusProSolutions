@@ -3,55 +3,72 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile, Booking, SERVICE_INTEREST_CHOICES, Testimonial # Import your models and choices
-
+from .models import SERVICE_TYPE_CHOICES, Profile, Booking, SERVICE_INTEREST_CHOICES, Testimonial # Import your models and choices
+from django.db import transaction
 # ----------------------------------------------------------------------
 # 1. Custom Registration Form (Handles User + Profile Creation)
-# ----------------------------------------------------------------------
+# 
 
-class UserAndProfileCreationForm(UserCreationForm):
-    # Add User Model fields (First Name, Last Name)
-    first_name = forms.CharField(max_length=150, required=True, help_text='Required.')
-    last_name = forms.CharField(max_length=150, required=True, help_text='Required.')
-    email = forms.EmailField(required=True, help_text='Required. Must be a valid email address.')
 
-    # Add Profile Model fields
-    phone_number = forms.CharField(max_length=20, required=False, help_text='Your WhatsApp/mobile number.')
+
+
+# CRITICAL FIX: Base the form on the User model
+class UserAndProfileCreationForm(forms.ModelForm):
+    # This form explicitly includes fields from User and Profile models.
+
+    # 1. Define Fields explicitly (passwords are standard, non-model fields)
+    password = forms.CharField(widget=forms.PasswordInput, label="Password")
+    password2 = forms.CharField(widget=forms.PasswordInput, label="Password confirmation")
+
+    # 2. Define the Meta class based on the PRIMARY model (User)
+    class Meta:
+        model = User # <--- CRITICAL: MUST SPECIFY THE MODEL
+        fields = ('username', 'first_name', 'last_name', 'email')
+        
+    # 3. Add fields from the secondary model (Profile) outside the Meta class
+    phone_number = forms.CharField(max_length=20, required=False, label="Phone Number")
     service_interest = forms.ChoiceField(
-        choices=SERVICE_INTEREST_CHOICES, 
+        # Assuming you defined SERVICE_TYPE_CHOICES somewhere in your forms.py or models.py
+        choices=SERVICE_TYPE_CHOICES, # <--- ENSURE THIS IS DEFINED AND IMPORTED
         required=False,
-        label='Primary Area of Interest'
+        label="Primary Service Interest"
     )
-    
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email', 'phone_number', 'service_interest',)
 
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if User.objects.filter(email=email).exists():
-            raise forms.ValidationError("This email is already in use.")
-        return email
+    # 4. Clean method for password validation (Security)
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        password2 = cleaned_data.get("password2")
 
-    # Custom save method to handle both User and Profile creation
+        if password and password2 and password != password2:
+            raise forms.ValidationError(
+                "Passwords must match."
+            )
+        return cleaned_data
+
+    # 5. Save method (The one we fixed earlier to prevent double-creation)
+    @transaction.atomic
     def save(self, commit=True):
         # 1. Save the User object first
-        user = super().save(commit=False)
-        user.first_name = self.cleaned_data["first_name"]
-        user.last_name = self.cleaned_data["last_name"]
-        user.email = self.cleaned_data["email"] # Ensure email is saved to the User model
+        user = super().save(commit=False) 
+        user.set_password(self.cleaned_data["password"])
+        user.save()
+
+        # 2. Safely create or update the Profile
+        profile_data = {
+            'phone_number': self.cleaned_data.get('phone_number'),
+            'service_interest': self.cleaned_data.get('service_interest'),
+            # Ensure other Profile fields like bio, etc., are handled if present
+        }
         
-        if commit:
-            user.save()
-            
-            # 2. Create the linked Profile object
-            profile = Profile.objects.create(
-                user=user,
-                phone_number=self.cleaned_data.get("phone_number"),
-                service_interest=self.cleaned_data.get("service_interest"),
-            )
-            profile.save()
+        # Use update_or_create to handle both new registration (create) and submission errors (update)
+        Profile.objects.update_or_create(user=user, defaults=profile_data)
+
         return user
+
+
+
+
 
 # ----------------------------------------------------------------------
 # 2. Profile Editing Form (Handles Profile fields only)

@@ -72,12 +72,6 @@ def terms(request):
 
 
 
-
-
-
-
-
-
 # Service/General Pages
 def ccnp(request):
     return render(request, 'ccnp.html')
@@ -162,7 +156,7 @@ def edit_profile_view(request):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Your profile has been updated successfully!')
-            return redirect('profile') 
+            return redirect('edit_profile') 
     else:
         # CRITICAL: These lines fetch the existing data from the database
         user_form = UserEditForm(instance=request.user)

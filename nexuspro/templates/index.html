@@ -136,52 +136,51 @@
 
 <!----TESTIMONIALS-->
 
-{% for t in testimonials %}
-<div class="col">
-    <div class="card h-100 shadow-sm border-0">
-        <div class="card-body d-flex flex-column">
-            <div class="mb-3 text-warning">
-                {% for i in ""|center:5 %} 
-                    {% if forloop.counter <= t.rating %}
-                        <i class="fas fa-star"></i>
-                    {% else %}
-                        <i class="far fa-star"></i>
-                    {% endif %}
-                {% endfor %}
-            </div>
+
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5 text-primary">Hear From Our Successful Clients</h2>
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4">
             
-            </div>
-    </div>
-</div>
-{% endfor %}
+            {% for t in testimonials %}
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column">
+                        
+                        <div class="mb-3 text-warning">
+                            {% for i in ""|center:5 %} 
+                                {% if forloop.counter <= t.rating %}
+                                    <i class="fas fa-star"></i>
+                                {% else %}
+                                    <i class="far fa-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
 
+                        <blockquote class="blockquote mb-0 flex-grow-1">
+                            <p class="fst-italic text-dark">{{ t.quote|truncatechars:180 }}</p>
+                        </blockquote>
+
+                        <footer class="blockquote-footer mt-3">
+                            <cite title="Client Name" class="fw-bold text-primary">{{ t.client_name }}</cite>
+                            <span class="d-block text-muted small">
+                                Service: {{ t.service_provided }}
+                            </span>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+
+            
     <!----END TESTIMONIALS---->
-
-
-
-    <!---TESTY-->
-
-
-
-
-{% for t in testimonials %}
-<div class="col">
-    <div class="card h-100 shadow-sm border-0">
-        <div class="card-body d-flex flex-column">
-            <div class="mb-3 text-warning">
-                {% for i in ""|center:5 %} 
-                    {% if forloop.counter <= t.rating %}
-                        <i class="fas fa-star"></i>
-                    {% else %}
-                        <i class="far fa-star"></i>
-                    {% endif %}
-                {% endfor %}
-            </div>
-            </div>
-    </div>
-</div>
-{% endfor %}
-
+    
+        </div>
+        </div>
+</section>
 
 
 
