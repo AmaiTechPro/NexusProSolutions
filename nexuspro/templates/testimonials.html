@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+
+{% load widget_tweaks %}
+
 {% load static %}
 
 {% block title %}Client Success Stories & Testimonials | Nexus Pro Solutions{% endblock %}
@@ -117,7 +120,7 @@
             <a href="{% url 'bookings' %}" class="btn btn-warning btn-lg shadow-lg me-3">
                 <i class="fas fa-calendar-alt me-2"></i> Book Your Session
             </a>
-            <a href="{% url 'contact' %}?subject=testimonial" class="btn btn-outline-light btn-lg">
+            <a href="{% url 'submit_testimonial' %}?subject=testimonial" class="btn btn-outline-light btn-lg">
                 <i class="fas fa-star me-2"></i> Submit Your Review
             </a>
         </div>

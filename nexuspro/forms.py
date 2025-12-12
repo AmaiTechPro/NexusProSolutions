@@ -3,7 +3,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile, Booking, SERVICE_INTEREST_CHOICES # Import your models and choices
+from .models import Profile, Booking, SERVICE_INTEREST_CHOICES, Testimonial # Import your models and choices
 
 # ----------------------------------------------------------------------
 # 1. Custom Registration Form (Handles User + Profile Creation)
@@ -91,3 +91,24 @@ class BookingForm(forms.ModelForm):
 
 
 
+
+# nexuspro/forms.py (Add this new form)
+
+
+# ... (Keep your other imports: UserEditForm, ProfileEditForm, BookingForm, etc.)
+
+# Testimonial Submission Form
+class TestimonialForm(forms.ModelForm):
+    # Ensure the Rating field uses RadioSelect for better rendering in the template
+    rating = forms.IntegerField(
+        widget=forms.RadioSelect(choices=[(i, i) for i in range(1, 6)]),
+        label="Rating (1-5 Stars)"
+    )
+
+    class Meta:
+        model = Testimonial
+        # Exclude fields that must be set securely in the view
+        fields = ['client_name', 'service_provided', 'quote', 'rating'] 
+        widgets = {
+            'quote': forms.Textarea(attrs={'rows': 4}),
+        }

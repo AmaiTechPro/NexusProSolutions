@@ -195,8 +195,8 @@ def book_consultation_view(request):
             booking.user = request.user 
             booking.save()
             
-            messages.success(request, 'Your booking request has been submitted!')
-            return redirect('profile') 
+            messages.success(request, 'Your booking request has been submitted successfully!')
+            return redirect('bookings') 
     else:
         form = BookingForm(initial=initial_data)
         
@@ -234,3 +234,59 @@ def contact(request):
     
     # Render the template (for GET requests or failed POST requests)
     return render(request, 'contact.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+# nexuspro/views.py (Add this new view function)
+
+from .forms import (
+    # ... other forms ...
+    TestimonialForm # <-- ADD THIS IMPORT
+)
+# ... other imports ...
+
+# ======================================================================
+# E. Testimonial Submission View (Functional)
+# ======================================================================
+
+@login_required
+def submit_testimonial_view(request):
+    """Allows logged-in users to submit a new testimonial."""
+    
+    if request.method == 'POST':
+        form = TestimonialForm(request.POST) 
+        if form.is_valid():
+            testimonial = form.save(commit=False)
+            
+            # CRITICAL SECURITY STEP: Associate the review with the logged-in user
+            testimonial.user = request.user 
+            
+            # Set client_name automatically for simplicity and consistency
+            if not testimonial.client_name:
+                 testimonial.client_name = f"{request.user.first_name} {request.user.last_name}"
+                 
+            testimonial.save()
+            
+            messages.success(request, 'Thank you! Your testimonial has been submitted for review.')
+            return redirect('submit_testimonial') # Redirect to dashboard after successful submission
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        # Pre-fill client name for convenience
+        initial_data = {
+            'client_name': f"{request.user.first_name} {request.user.last_name}"
+        }
+        form = TestimonialForm(initial=initial_data)
+        
+    context = {'form': form}
+    return render(request, 'submit_testimonial.html', context)

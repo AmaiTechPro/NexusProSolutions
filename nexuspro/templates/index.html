@@ -159,9 +159,48 @@
 
 
 
+    <!---TESTY-->
 
 
 
+
+{% for t in testimonials %}
+<div class="col">
+    <div class="card h-100 shadow-sm border-0">
+        <div class="card-body d-flex flex-column">
+            <div class="mb-3 text-warning">
+                {% for i in ""|center:5 %} 
+                    {% if forloop.counter <= t.rating %}
+                        <i class="fas fa-star"></i>
+                    {% else %}
+                        <i class="far fa-star"></i>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!---ENDTESTY-->
 
     <section class="py-5">
         <div class="container">

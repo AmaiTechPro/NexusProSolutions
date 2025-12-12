@@ -43,9 +43,9 @@ urlpatterns = [
 
     path('web/', views.web, name ="web"),
 
+    path('bookings/', views.book_consultation_view, name='bookings'),
 
-
-    path('bookings/', views.bookings, name ="bookings"),
+    path('submit-testimonial/', views.submit_testimonial_view, name='submit_testimonial'),
 
     path('profile/', views.profile, name ="profile"),
 
