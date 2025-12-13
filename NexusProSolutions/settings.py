@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+import dj_database_url # <--- ADD THIS IMPORT
 
 #M-PESA API INTEGRATION START
 # settings.py
@@ -43,22 +45,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8vm%^eq%*)9m$8i@j@dok@3dtyw(a7ewgn$s+qm+yjm=3h-ks%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False  #FOR PRODUCTION ENVIRONMENT
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.render.com', 'localhost', '127.0.0.1']
 
+#<--- Other security settings you may need:--->
+SECURE_HSTS_SECONDS = 2592000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
-# settings.py
-
-# ... other settings ...
-
-ALLOWED_HOSTS = [
-    'localhost', 
-    '127.0.0.1', 
-    '[::1]', 
-    '.ngrok.io', 
-    'hegemonical-tensorial-felicita.ngrok-free.dev' # Add your specific ngrok host here
-]
+#<---END OF OTHER SECURITY SETTINGS FOR PRODUCTION ENVIRONMENT--->
 
 
 # Application definition
@@ -82,7 +81,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    #<--ADDED BELOW FOR PRODUCTION ENVIRONMENT IN RENDER WITH DIFFERENT DATABASE-->
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+          # <---END OF ADDED--->
+]   
 
 ROOT_URLCONF = 'NexusProSolutions.urls'
 
@@ -107,11 +109,15 @@ WSGI_APPLICATION = 'NexusProSolutions.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+# settings.py (Production Ready)
+# 4. Database Configuration
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Looks for the DATABASE_URL environment variable (from Render)
+        # If not found (running locally), it defaults back to SQLite3
+        default=os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3'),
+        conn_max_age=600 # Enables connection pooling for performance
+    )
 }
 
 
@@ -154,6 +160,12 @@ STATICFILES_DIRS = [
     BASE_DIR, 'static'
 ]
 
+# settings.py
+
+# 3. Static Files Configuration for Whitenoise
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # settings.py
@@ -164,3 +176,9 @@ LOGIN_REDIRECT_URL = '/profile/'
 
 # Ensure the login path is also defined (it usually defaults to this)
 LOGIN_URL = '/login/'
+
+
+
+
+
+#SWITCHING FROM SQLITE3 TO PostgreSQL FOR HOSTING IN RENDER 
