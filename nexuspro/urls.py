@@ -157,7 +157,18 @@ admin.site.index_title = "Welcome to the Nexus Pro Admin Space"
 
 
 
+#ADDING M-PESA API PATHS
+# urls.py (Add this to your urlpatterns list)
 
+# M-Pesa Initiation View 
+# URL format: /mpesa/stkpush/100/254712345678/ 
+path('mpesa/stkpush/<int:amount>/<str:phone_number>/', views.initiate_stk_push, name='mpesa_stk_push'),
+
+
+# M-Pesa Callback Endpoint (M-Pesa hits this URL directly, must be exempted from CSRF)
+path('mpesa/callback/', views.mpesa_callback, name='mpesa_callback'),
+
+#END OF M-PESA API PATHS
 
 
 

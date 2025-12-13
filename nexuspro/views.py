@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
@@ -123,17 +124,60 @@ def register_view(request):
 # C. Account Management Views (Functional)
 # ======================================================================
 
+# nexuspro/views.py (Final context change)
+
+
+
+
+#TEST2-PROFILE VIEW
+
+# nexuspro/views.py (Focus on profile_view)
+
 @login_required
 def profile_view(request):
-    """Displays the user dashboard and their current bookings."""
-    
+    # CRITICAL: Ensures the user_profile object exists
+    try:
+        user_profile = request.user.profile
+    except Profile.DoesNotExist:
+        user_profile = Profile.objects.create(user=request.user)
+
     bookings = Booking.objects.filter(user=request.user).order_by('-request_date')
 
     context = {
         'bookings': bookings,
-        'user_profile': request.user.profile 
+        'user_profile': user_profile, 
+        'user': request.user 
     }
-    return render(request, 'profile.html', context) 
+    
+    # === TEMPORARY CRASH/DEBUG LINE (Add this) ===
+    # This will print the database data for the user_profile object.
+    # If the data is correct here, the issue is 100% in the template.
+    print("--- DEBUG PROFILE DATA ---")
+    print("Phone Number:", user_profile.phone_number)
+    print("Service Interest:", user_profile.service_interest)
+    print("Bio:", user_profile.bio)
+    print("--------------------------")
+    # raise Exception("STOP HERE") # Uncomment this line to force a crash if needed
+    # ============================================
+
+    return render(request, 'profile.html', context)
+
+
+
+
+#ENDTEST PROFILE VIEW
+
+
+
+
+
+
+
+
+
+
+
+
 
 # **CONSOLIDATED AND CORRECTED edit_profile_view**
 @login_required
@@ -284,3 +328,154 @@ def submit_testimonial_view(request):
         
     context = {'form': form}
     return render(request, 'submit_testimonial.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+# M-PESA API INTEGRATION
+
+# nexuspro/views.py (Add new imports at the top)
+import requests
+import base64
+from datetime import datetime
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render, redirect # (ensure these are already there)
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
+# --- M-PESA UTILITY FUNCTION ---
+
+def get_mpesa_access_token():
+    """Retrieves the M-Pesa API access token required for all transaction requests."""
+    
+    credentials = f"{settings.MPESA_CONSUMER_KEY}:{settings.MPESA_CONSUMER_SECRET}"
+    # Base64 encode the key:secret pair
+    auth_header = base64.b64encode(credentials.encode('utf-8')).decode('utf-8')
+    
+    url = f"{settings.MPESA_API_BASE_URL}oauth/v1/generate?grant_type=client_credentials"
+    
+    try:
+        response = requests.get(
+            url,
+            headers={"Authorization": f"Basic {auth_header}"}
+        )
+        response.raise_for_status() 
+        token_data = response.json()
+        return token_data.get('access_token')
+        
+    except requests.exceptions.RequestException as e:
+        # In a real app, you would log this error securely
+        print(f"M-Pesa Token Error: {e}") 
+        return None
+
+# --- M-PESA TRANSACTION VIEWS ---
+
+@login_required
+def initiate_stk_push(request, amount, phone_number, account_reference="NexusProPayment"):
+    """
+    Initiates an STK Push payment prompt to the user's phone.
+    
+    Note: 'phone_number' must be in 2547XXXXXXXX format.
+    """
+    
+    token = get_mpesa_access_token()
+    if not token:
+        messages.error(request, "Payment service temporarily unavailable (Authentication failure).")
+        return redirect('profile') 
+
+    # 1. Prepare Timestamp
+    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+    
+    # 2. Prepare Password (Shortcode + Passkey + Timestamp)
+    password_data = f"{settings.MPESA_SHORTCODE_STK}{settings.MPESA_PASSKEY}{timestamp}"
+    password = base64.b64encode(password_data.encode('utf-8')).decode('utf-8')
+    
+    # 3. Define the API Request Body
+    
+    # CRITICAL FIX FOR TESTING: Hardcode the active Ngrok HTTPS URL
+    # Replace the Ngrok URL below with your currently running one (it changes when Ngrok restarts)
+    callback_url = "https://hegemonical-tensorial-felicita.ngrok-free.dev/mpesa/callback/"
+
+    # Original line (DEACTIVATED FOR TESTING):
+    # callback_url = request.build_absolute_uri('/mpesa/callback/') 
+
+    payload = {
+        "BusinessShortCode": settings.MPESA_SHORTCODE_STK,
+        "Password": password,
+        "Timestamp": timestamp,
+        "TransactionType": "CustomerPayBillOnline", 
+        "Amount": amount,
+        "PartyA": phone_number,
+        "PartyB": settings.MPESA_SHORTCODE_STK,
+        "PhoneNumber": phone_number,
+        "CallBackURL": callback_url,
+        "AccountReference": account_reference,
+        "TransactionDesc": "Service Payment - NexusPro"
+    }
+
+    # 4. Make the STK Push Request
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json"
+    }
+    stk_url = f"{settings.MPESA_API_BASE_URL}stkpush/v1/processrequest"
+    
+    try:
+        response = requests.post(stk_url, json=payload, headers=headers)
+        response.raise_for_status()
+        
+        stk_response = response.json()
+        
+        # Check M-Pesa's specific ResponseCode for success
+        if stk_response.get("ResponseCode") == "0":
+            # Successfully requested the prompt on the user's phone
+            messages.success(request, "M-Pesa payment prompt sent successfully! Check your phone.")
+        else:
+            # Handle M-Pesa API errors (e.g., invalid phone number)
+            messages.error(request, f"M-Pesa Request Error: {stk_response.get('ResponseDescription', 'Unknown API error')}")
+
+    except requests.exceptions.RequestException as e:
+        messages.error(request, f"Failed to connect to M-Pesa service. Please try again.")
+
+    return redirect('profile') # Redirect user back to profile dashboard
+
+
+@csrf_exempt # Required because M-Pesa is an external POSTing to our server
+def mpesa_callback(request):
+    """
+    Receives M-Pesa STK Push results (success or failure) from Safaricom.
+    THIS MUST BE PUBLICLY ACCESSIBLE VIA HTTPS.
+    """
+    if request.method == 'POST':
+        try:
+            # Safaricom sends data as JSON in the request body
+            callback_data = request.body.decode('utf-8')
+            
+            # CRITICAL: Log this data to a file/database for auditing!
+            print("--- M-Pesa Callback Received ---")
+            print(callback_data)
+            
+            # TODO: Add logic here to parse the JSON and update your Booking/Payment model
+            # e.g., if ResultCode is 0, mark the booking as paid.
+
+            # M-Pesa requires a specific JSON response to confirm receipt
+            return JsonResponse({"ResultCode": 0, "ResultDesc": "C2B_Request_Received"}, status=200)
+
+        except Exception as e:
+            # Log errors during internal processing
+            print(f"Error processing M-Pesa callback: {e}")
+            return JsonResponse({"ResultCode": 1, "ResultDesc": "Internal_Error"}, status=500)
+    
+    return JsonResponse({"error": "Invalid method"}, status=405)
+
+#END OF M-PESA API INTEGRATION

@@ -12,6 +12,26 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
+#M-PESA API INTEGRATION START
+# settings.py
+
+# --- MPESA CONFIGURATION ---
+from decouple import config # Make sure 'from decouple import config' is at the top
+
+MPESA_CONSUMER_KEY = config('MPESA_CONSUMER_KEY')
+MPESA_CONSUMER_SECRET = config('MPESA_CONSUMER_SECRET')
+MPESA_SHORTCODE_STK = config('MPESA_SHORTCODE_STK', default='174379')
+MPESA_PASSKEY = config('MPESA_PASSKEY')
+MPESA_API_BASE_URL = config('MPESA_API_BASE_URL', default='https://sandbox.safaricom.co.ke/mpesa/')
+
+
+
+#END OF M-PESA API INTEGRATION
+
+
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,6 +46,19 @@ SECRET_KEY = 'django-insecure-8vm%^eq%*)9m$8i@j@dok@3dtyw(a7ewgn$s+qm+yjm=3h-ks%
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+
+# settings.py
+
+# ... other settings ...
+
+ALLOWED_HOSTS = [
+    'localhost', 
+    '127.0.0.1', 
+    '[::1]', 
+    '.ngrok.io', 
+    'hegemonical-tensorial-felicita.ngrok-free.dev' # Add your specific ngrok host here
+]
 
 
 # Application definition

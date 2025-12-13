@@ -47,24 +47,35 @@ class UserAndProfileCreationForm(forms.ModelForm):
         return cleaned_data
 
     # 5. Save method (The one we fixed earlier to prevent double-creation)
-    @transaction.atomic
-    def save(self, commit=True):
-        # 1. Save the User object first
-        user = super().save(commit=False) 
-        user.set_password(self.cleaned_data["password"])
-        user.save()
 
-        # 2. Safely create or update the Profile
-        profile_data = {
-            'phone_number': self.cleaned_data.get('phone_number'),
-            'service_interest': self.cleaned_data.get('service_interest'),
-            # Ensure other Profile fields like bio, etc., are handled if present
-        }
-        
-        # Use update_or_create to handle both new registration (create) and submission errors (update)
-        Profile.objects.update_or_create(user=user, defaults=profile_data)
 
-        return user
+#TEST
+# nexuspro/forms.py (Final safe save method)
+
+@transaction.atomic
+def save(self, commit=True):
+    # 1. Save the User
+    user = super().save(commit=False) 
+    user.set_password(self.cleaned_data["password"])
+    user.save()
+
+    # 2. Get Profile data from cleaned_data
+    profile_data = {
+        'phone_number': self.cleaned_data.get('phone_number', ''),
+        'service_interest': self.cleaned_data.get('service_interest', ''),
+        'bio': self.cleaned_data.get('bio', ''), 
+    }
+    
+    # 3. Use update_or_create to guarantee data integrity
+    Profile.objects.update_or_create(
+        user=user, 
+        defaults=profile_data
+    )
+
+    return user
+
+#ENDTEST
+
 
 
 
